@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
 import urllib2
+import logging
 from urllib import quote
 from cookielib import CookieJar
 from lxml import html, etree
@@ -68,7 +69,7 @@ class Grabber:
         for el in els:
             url = quote(el.get('href'), safe="%/:=&?~#+!$,;'@()*[]")
             name = el.text
-            print("Fetching and packing '{}'".format(url))
+            logging.info("Fetching and packing '{}'".format(url))
             content = urllib2.urlopen(url)
             zipF.writestr(name, content.read())
             content.close()
